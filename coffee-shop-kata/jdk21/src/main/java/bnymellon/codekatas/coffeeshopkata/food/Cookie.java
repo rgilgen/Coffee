@@ -23,4 +23,9 @@ public record Cookie(CookieType cookieType, boolean warmed) implements BakeryIte
     {
         return 1.25;
     }
+
+    @Override
+    public String printReceipt() {
+        return "Cookie: CHOCOLATE_CHIP $1.25";
+    }
 }

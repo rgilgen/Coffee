@@ -79,6 +79,9 @@ public class CoffeeShopTest
     @Test
     public void generateReceiptForFoodItemsTest()
     {
+        Bagel bagel = new Bagel(EVERYTHING, HERB_GARLIC_CREAM_CHEESE, true);
+        Cookie cookie = new Cookie(CHOCOLATE_CHIP, cookie1.warmed());
+        Donut donut = new Donut(GLAZED);
         // TODO: Complete the method generateReceipt() in CoffeeShopOrder to make this pass
         String expectedReceipt = """
                 Bagel: EVERYTHING $2.5

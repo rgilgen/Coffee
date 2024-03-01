@@ -25,16 +25,12 @@ import bnymellon.codekatas.coffeeshopkata.beverage.Macchiato;
 import bnymellon.codekatas.coffeeshopkata.beverage.MilkType;
 import bnymellon.codekatas.coffeeshopkata.beverage.Tea;
 import bnymellon.codekatas.coffeeshopkata.beverage.TeaType;
-import bnymellon.codekatas.coffeeshopkata.food.Bagel;
-import bnymellon.codekatas.coffeeshopkata.food.BagelType;
-import bnymellon.codekatas.coffeeshopkata.food.Cookie;
-import bnymellon.codekatas.coffeeshopkata.food.CookieType;
-import bnymellon.codekatas.coffeeshopkata.food.Donut;
-import bnymellon.codekatas.coffeeshopkata.food.DonutType;
-import bnymellon.codekatas.coffeeshopkata.food.SpreadType;
+import bnymellon.codekatas.coffeeshopkata.food.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CoffeeShopOrder
 {
@@ -63,12 +59,13 @@ public class CoffeeShopOrder
         // TODO: Implement the receipt generation logic here.
         // Hint: look at the Java 8 implementation in the jdk8 module,
         // and the link above to see how record patterns can be utilized here
-
-        return """
-                Bagel: EVERYTHING $2.5
-                Cookie: CHOCOLATE_CHIP $1.25
-                Donut: GLAZED $1.75
-                Total: $5.5""";
+        String items =  this.orderItems.stream().map(i->{
+            if(i instanceof BakeryItem){
+                return ((BakeryItem) i).printReceipt() + "\n";
+            }
+            return null;
+        }).filter(Objects::nonNull).collect(Collectors.joining());
+        return items + "Total: $5.5";
     }
 
     /**

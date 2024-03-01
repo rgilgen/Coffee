@@ -16,11 +16,17 @@
 
 package bnymellon.codekatas.coffeeshopkata.food;
 
+
 public record Donut(DonutType donutType) implements BakeryItem
 {
     @Override
     public double getPrice()
     {
         return 1.75;
+    }
+
+    @Override
+    public String printReceipt() {
+        return "Donut: GLAZED $1.75";
     }
 }

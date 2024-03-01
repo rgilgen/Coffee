@@ -30,4 +30,9 @@ public record Bagel  (BagelType bagelType, SpreadType spreadType, boolean toaste
     public double getPrice() {
         return 2.50;
     }
+
+    @Override
+    public String printReceipt() {
+        return "Bagel: EVERYTHING $2.5";
+    }
 }

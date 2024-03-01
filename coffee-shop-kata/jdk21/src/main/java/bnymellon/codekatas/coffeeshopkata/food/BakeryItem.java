@@ -20,5 +20,5 @@ import bnymellon.codekatas.coffeeshopkata.Item;
 
 public interface BakeryItem extends Item
 {
-
+    String printReceipt();
 }
