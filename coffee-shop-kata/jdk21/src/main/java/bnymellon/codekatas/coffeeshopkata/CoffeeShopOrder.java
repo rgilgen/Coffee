@@ -16,29 +16,17 @@
 
 package bnymellon.codekatas.coffeeshopkata;
 
-import bnymellon.codekatas.coffeeshopkata.beverage.Americano;
-import bnymellon.codekatas.coffeeshopkata.beverage.CoffeeDrink;
-import bnymellon.codekatas.coffeeshopkata.beverage.DrinkTemperature;
-import bnymellon.codekatas.coffeeshopkata.beverage.FlavorSyrup;
-import bnymellon.codekatas.coffeeshopkata.beverage.Latte;
-import bnymellon.codekatas.coffeeshopkata.beverage.Macchiato;
-import bnymellon.codekatas.coffeeshopkata.beverage.MilkType;
-import bnymellon.codekatas.coffeeshopkata.beverage.Tea;
-import bnymellon.codekatas.coffeeshopkata.beverage.TeaType;
-import bnymellon.codekatas.coffeeshopkata.food.*;
+import bnymellon.codekatas.coffeeshopkata.food.BakeryItem;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CoffeeShopOrder
-{
+public class CoffeeShopOrder {
     private final String customerName;
     private final List<Item> orderItems;
 
-    public CoffeeShopOrder(String customerName, List<Item> orderItems)
-    {
+    public CoffeeShopOrder(String customerName, List<Item> orderItems) {
         this.customerName = customerName;
         this.orderItems = orderItems;
     }
@@ -54,19 +42,23 @@ public class CoffeeShopOrder
      *
      * @see <a href="https://openjdk.org/jeps/440">...</a>
      */
-    public String generateReceiptForFoodItems()
-    {
-        // TODO: Implement the receipt generation logic here.
-        // Hint: look at the Java 8 implementation in the jdk8 module,
-        // and the link above to see how record patterns can be utilized here
-        String items =  this.orderItems.stream().map(i->{
-            if(i instanceof BakeryItem){
-                return ((BakeryItem) i).printReceipt() + "\n";
-            }
-            return null;
-        }).filter(Objects::nonNull).collect(Collectors.joining());
-        return items + "Total: $5.5";
+    public String generateReceiptForFoodItems() {
+        List<BakeryItem> bakeryItems = this.orderItems.stream()
+                .filter(BakeryItem.class::isInstance)
+                .map(i -> (BakeryItem) i)
+                .toList();
+
+        String items = bakeryItems.stream()
+                .map(b -> b.printReceipt() + "\n")
+                .collect(Collectors.joining());
+
+        double total = bakeryItems.stream()
+                .mapToDouble(Item::getPrice)
+                .sum();
+
+        return items + "Total: $" + total;
     }
+
 
     /**
      * Return a list of custom strings for the customer's food items!
@@ -80,8 +72,7 @@ public class CoffeeShopOrder
      *
      * @see <a href="https://openjdk.org/jeps/441">...</a>
      */
-    public List<String> getFoodItemsForOrder()
-    {
+    public List<String> getFoodItemsForOrder() {
         // TODO: implement method
         // Hint: look at the Java 8 implementation in the jdk8 module,
         // and the link above to see how pattern matching for switch can be utilized here
@@ -99,8 +90,7 @@ public class CoffeeShopOrder
      * (e.g., Americano, Latte, Macchiato) are allowed within a hierarchy.
      * However, Tea is not part of this hierarchy.
      */
-    public List<String> getDrinksForOrder()
-    {
+    public List<String> getDrinksForOrder() {
         // TODO: implement method logic here
         return Collections.emptyList();
     }
