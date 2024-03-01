@@ -25,7 +25,7 @@ package bnymellon.codekatas.coffeeshopkata.food;
  *
  * @see <a href="https://openjdk.org/jeps/395">...</a>
  */
-public record Bagel  (BagelType bagelType, SpreadType spreadType, boolean toasted) implements BakeryItem{
+public record Bagel(BagelType bagelType, SpreadType spreadType, boolean toasted) implements BakeryItem {
     @Override
     public double getPrice() {
         return 2.50;
@@ -33,6 +33,6 @@ public record Bagel  (BagelType bagelType, SpreadType spreadType, boolean toaste
 
     @Override
     public String printReceipt() {
-        return "Bagel: EVERYTHING $2.5";
+        return "Bagel: " + bagelType + " $" + getPrice();
     }
 }

@@ -16,16 +16,14 @@
 
 package bnymellon.codekatas.coffeeshopkata.food;
 
-public record Cookie(CookieType cookieType, boolean warmed) implements BakeryItem
-{
+public record Cookie(CookieType cookieType, boolean warmed) implements BakeryItem {
     @Override
-    public double getPrice()
-    {
+    public double getPrice() {
         return 1.25;
     }
 
     @Override
     public String printReceipt() {
-        return "Cookie: CHOCOLATE_CHIP $1.25";
+        return "Cookie: " + cookieType + " $" + getPrice();
     }
 }
