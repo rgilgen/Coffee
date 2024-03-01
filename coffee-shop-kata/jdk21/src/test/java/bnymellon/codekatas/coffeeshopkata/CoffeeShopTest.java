@@ -95,7 +95,9 @@ public class CoffeeShopTest
     {
         // TODO: Complete the method getFoodItemsForOrder() in CoffeeShopOrder to make this pass
         List<String> expected = List.of("CHOCOLATE_CHIP cookie", "EVERYTHING bagel with HERB_GARLIC_CREAM_CHEESE", "GLAZED donut");
+
         List<String> actual = coffeeShopOrder.getFoodItemsForOrder();
+
         Collections.sort(actual);
         assertEquals(expected, actual);
     }

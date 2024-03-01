@@ -16,8 +16,13 @@
 
 package bnymellon.codekatas.coffeeshopkata;
 
+import bnymellon.codekatas.coffeeshopkata.food.Bagel;
 import bnymellon.codekatas.coffeeshopkata.food.BakeryItem;
+import bnymellon.codekatas.coffeeshopkata.food.Cookie;
+import bnymellon.codekatas.coffeeshopkata.food.Donut;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,11 +78,28 @@ public class CoffeeShopOrder {
      * @see <a href="https://openjdk.org/jeps/441">...</a>
      */
     public List<String> getFoodItemsForOrder() {
-        // TODO: implement method
-        // Hint: look at the Java 8 implementation in the jdk8 module,
-        // and the link above to see how pattern matching for switch can be utilized here
-        return Collections.emptyList();
+        //return Arrays.asList("CHOCOLATE_CHIP cookie", "EVERYTHING bagel with HERB_GARLIC_CREAM_CHEESE", "GLAZED donut");
+        List<String> foodItemsForOrder = new ArrayList<>();
+        for(Item item : orderItems){
+            switch (item){
+                case Bagel bagel -> {
+                     foodItemsForOrder.add(bagel.bagelType() + " bagel with " + bagel.spreadType());
+                }case Cookie cookie -> {
+                    foodItemsForOrder.add(cookie.cookieType() + " cookie");
+                }case Donut donut -> {
+                    foodItemsForOrder.add( donut.donutType() + " donut");
+                }
+                default -> {
+                    break;
+                }
+            }
+        }
+        return foodItemsForOrder;
     }
+
+
+
+
 
     /**
      * Return a list of custom strings for the customer's drinks!
