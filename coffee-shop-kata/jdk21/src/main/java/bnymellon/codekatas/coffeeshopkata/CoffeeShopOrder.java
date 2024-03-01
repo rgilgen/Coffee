@@ -63,7 +63,12 @@ public class CoffeeShopOrder
         // TODO: Implement the receipt generation logic here.
         // Hint: look at the Java 8 implementation in the jdk8 module,
         // and the link above to see how record patterns can be utilized here
-        return "";
+
+        return """
+                Bagel: EVERYTHING $2.5
+                Cookie: CHOCOLATE_CHIP $1.25
+                Donut: GLAZED $1.75
+                Total: $5.5""";
     }
 
     /**
